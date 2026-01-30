@@ -445,7 +445,7 @@ if [ "$SETUP_ONLY" = false ]; then
     log_war "👑 全軍に Claude Code を召喚中..."
 
     # 将軍
-    tmux send-keys -t shogun "MAX_THINKING_TOKENS=0 claude --model opus --dangerously-skip-permissions"
+    tmux send-keys -t shogun "codex --yolo"
     tmux send-keys -t shogun Enter
     log_info "  └─ 将軍、召喚完了"
 
@@ -454,13 +454,13 @@ if [ "$SETUP_ONLY" = false ]; then
 
     # 家老 + 足軽（window 0）
     for i in {0..3}; do
-        tmux send-keys -t "${PANE_IDS_W0[$i]}" "claude --dangerously-skip-permissions"
+        tmux send-keys -t "${PANE_IDS_W0[$i]}" "codex --yolo"
         tmux send-keys -t "${PANE_IDS_W0[$i]}" Enter
     done
 
     # 足軽（window 1）
     for i in {0..4}; do
-        tmux send-keys -t "${PANE_IDS_W1[$i]}" "claude --dangerously-skip-permissions"
+        tmux send-keys -t "${PANE_IDS_W1[$i]}" "codex --yolo"
         tmux send-keys -t "${PANE_IDS_W1[$i]}" Enter
     done
     log_info "  └─ 家老・足軽、召喚完了"
@@ -561,7 +561,7 @@ NINJA_EOF
     log_info "  └─ 家老に指示書を伝達中..."
     tmux send-keys -t "${PANE_IDS_W0[0]}" "instructions/karo.md を読んで役割を理解せよ。"
     sleep 0.5
-    tmux send-keys -t "multiagent:0.0" Enter
+    tmux send-keys -t "${PANE_IDS_W0[0]}" Enter
 
     # 足軽に指示書を読み込ませる（1-8）
     sleep 2
